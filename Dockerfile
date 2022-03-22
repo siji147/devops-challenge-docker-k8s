@@ -1,7 +1,7 @@
-FROM node:16.14.2
+FROM node:16.14.2-alpine
 
 #Add non-root user dockeruser
-RUN useradd -u 8877 dockeruser
+RUN adduser dockeruser --disabled-password
 
 #Create new app folder in home directory
 RUN mkdir -p /home/app
