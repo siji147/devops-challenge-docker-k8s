@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: plan-a-namespace
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plan-a-deployment
+  namespace: plan-a-namespace
+  labels:
+    app: plan-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plan-a
+  template:
+    metadata:
+      namespace: plan-a-namespace
+      labels:
+        app: plan-a
+    spec:
+      containers:
+      - name: plan-a-challenge-1
+        image: siji147/plan-a-challenge-1:1
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: plan-a-service
+  namespace: plan-a-namespace
+spec:
+  type: LoadBalancer
+  selector:
+    app: plan-a
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 32000
