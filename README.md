@@ -1,12 +1,12 @@
 # PlanA DevOps Challenge 1
 
-### Introduction
+## Introduction
 
 ---
 
 This challenge is about using creating and containerizing a simple web application that returns a custom JSON object on accessing its root ('/') path.
 
-### Building the Image
+## Building the Image
 
 ---
 
@@ -22,7 +22,7 @@ You can run the following command to pull the image from Dockerhub:
 docker pull siji147/plan-a-challenge-1:1
 ```
 
-### Running the Container
+## Running the Container
 
 ---
 
@@ -40,7 +40,7 @@ docker run -p <custom-port>:3000 siji147/plan-a-challenge-1:1
 
 where custom-port is your custom port number.
 
-You can access the application by going to the URL http://\<server-ip\>:\<port-number\> e.g. http://localhost:3000.
+You can access the application by going to the URL `http://<server-ip>:<port-number>` e.g. `http://localhost:3000`.
 
 **To run the container as part of a Kubernetes cluster**, verify that `kubectl` is installed and you have a Kubernetes cluster either locally using `minikube` or in the cloud.
 
@@ -66,4 +66,4 @@ You can access the application by running the command:
 minikube service plan-a-service -n plan-a-namespace
 ```
 
-The application will be automatically opened in your default browser and it will listen on port 32000 which is the configured nodePort in the Kubernetes manifest.
+The application will automatically be opened in your default browser on port 32000 which is the configured nodePort in the Kubernetes manifest.
