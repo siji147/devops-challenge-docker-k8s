@@ -1,4 +1,4 @@
-# PlanA DevOps Challenge 1
+# DevOps Challenge - Docker and Kubernetes
 
 ## Introduction
 
