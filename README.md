@@ -4,7 +4,8 @@
 
 ---
 
-This challenge is about using creating and containerizing a simple web application that returns a custom JSON object on accessing its root ('/') path.
+This challenge is about developing and dockerizing a simple web API that returns a custom JSON object on accessing its root ('/') path.
+The full details of the challenge can be found [here](./devops-challenge.md). The web API has been developed with Node.js.
 
 ## Building the Image
 
