@@ -5,6 +5,11 @@ name: Node CI
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - 'README.md'
+      - 'Dockerfile'
+      - 'devops-challenge.md'
+      - 'k8s-manifest.yaml'
 
 jobs:
   # job name can be anything. It groups a set of actions that can be executed.
