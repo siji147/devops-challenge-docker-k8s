@@ -1,0 +1,52 @@
+# workflow name
+name: Node CI
+
+# workflow event triggers
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  # job name can be anything. It groups a set of actions that can be executed.
+  build:
+    runs-on: ubuntu-latest #runs on ubuntu, windows or macos
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3 #some of the actions like checkout@v3 are some codes written by other users to perform some actions like checking out code in this case. You can find more actions here
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1 #'uses' selects an action while 'run' runs a command-line cmd
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, and test
+      run: |
+        npm ci
+        npm run build --if-present
+        
+      env:
+        CI: true
+    - uses: actions/upload-artifact@master
+      with:
+        name: webpack artifacts
+        path: public/
+
+  deploy:
+    name: Deploy Node.js app to AWS
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download built artifact
+        uses: actions/download-artifact@master
+        with:
+          name: node artifacts
+          path: public
+
+      - name: Deploy to AWS
+        uses: github/deploy-nodejs@master
+        env:
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
